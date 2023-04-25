@@ -1,16 +1,19 @@
 import { useState } from "react";
-
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
 import { Dropdown } from "react-bootstrap";
 export default function Home() {
   const [selectedCable, setSelectedCable] = useState("Select Coax Size");
   const [selectedFrequency, setSelectedFrequency] =
     useState("Select Frequency");
+
+  const [cableDistance, setCableDistance] = useState(" ");
   const handleCableSizeChoice = (option) => {
     setSelectedCable(option);
   };
 
   const handleFrequencyChoice = (option) => {
-    setSelectedCable(option);
+    setSelectedFrequency(option);
   };
 
   return (
@@ -84,6 +87,22 @@ export default function Home() {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+        </div>
+
+        <div>
+          <FloatingLabel
+            className="search-input-label form-label"
+            label="Cable Ft"
+          >
+            <Form.Control
+              className="search-input-form-control form-input"
+              type="text"
+              placeholder="Cable Ft"
+              onChange={(e) => {
+                setHeader(e.target.value);
+              }}
+            />
+          </FloatingLabel>
         </div>
       </div>
     </div>

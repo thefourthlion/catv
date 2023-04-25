@@ -9,11 +9,20 @@
   }
 
   .dropdown {
+    height: 55px;
     width: 250px;
   }
 
   .dropdown-item {
     text-align: center;
+    width: 250px;
+  }
+
+  .form-input {
+    width: 250px;
+  }
+
+  .form-label {
     width: 250px;
   }
 }
