@@ -1,6 +1,6 @@
 const sitemap = require("nextjs-sitemap-generator");
 sitemap({
-  baseUrl: "https://twainharteace.com/",
+  baseUrl: "https://catv.everettdeleon.com/",
   ignoredPaths: ["admin", "login"],
   ignoredExtensions: [
     "js",
