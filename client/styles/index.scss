@@ -1,2 +1,19 @@
 .Home {
+  margin-top: 100px;
+  .cable-loss-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .dropdown {
+    width: 250px;
+  }
+
+  .dropdown-item {
+    text-align: center;
+    width: 250px;
+  }
 }
