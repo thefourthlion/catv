@@ -6,8 +6,8 @@ export default function Home() {
   const [selectedCable, setSelectedCable] = useState("Select Coax Size");
   const [selectedFrequency, setSelectedFrequency] =
     useState("Select Frequency");
-
   const [cableDistance, setCableDistance] = useState(" ");
+
   const handleCableSizeChoice = (option) => {
     setSelectedCable(option);
   };
@@ -99,7 +99,7 @@ export default function Home() {
               type="text"
               placeholder="Cable Ft"
               onChange={(e) => {
-                setHeader(e.target.value);
+                setCableDistance(e.target.value);
               }}
             />
           </FloatingLabel>
