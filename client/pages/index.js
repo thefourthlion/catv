@@ -194,7 +194,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setThreeWayCount(threeWayCount + 1);
-                  setAttenuation(attenuation - 7);
+                  setAttenuation(attenuation - 5.5);
                 }}
               >
                 3-Way
@@ -203,7 +203,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setFourWayCount(fourWayCount + 1);
-                  setAttenuation(attenuation - 3.5);
+                  setAttenuation(attenuation - 7);
                 }}
               >
                 4-Way
@@ -216,7 +216,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setThreeWayCount(threeWayCount - 1);
-                    setAttenuation(attenuation + 0.5);
+                    setAttenuation(attenuation + 5.5);
                   }}
                 >
                   {threeWayCount}
@@ -225,7 +225,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setFourWayCount(fourWayCount - 1);
-                    setAttenuation(attenuation + 3.5);
+                    setAttenuation(attenuation + 7);
                   }}
                 >
                   {fourWayCount}
@@ -240,7 +240,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setFiveWayCount(fiveWayCount + 1);
-                  setAttenuation(attenuation - 3.5);
+                  setAttenuation(attenuation - 7);
                 }}
               >
                 5-Way
@@ -249,7 +249,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setSixWayCount(sixWayCount + 1);
-                  setAttenuation(attenuation - 3.5);
+                  setAttenuation(attenuation - 9);
                 }}
               >
                 6-Way
@@ -262,7 +262,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setFiveWayCount(fiveWayCount - 1);
-                    setAttenuation(attenuation + 0.5);
+                    setAttenuation(attenuation + 7);
                   }}
                 >
                   {fiveWayCount}
@@ -271,7 +271,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setSixWayCount(sixWayCount - 1);
-                    setAttenuation(attenuation + 3.5);
+                    setAttenuation(attenuation + 9);
                   }}
                 >
                   {sixWayCount}
@@ -286,7 +286,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setEightWayCount(eightWayCount + 1);
-                  setAttenuation(attenuation - 3.5);
+                  setAttenuation(attenuation - 10.5);
                 }}
               >
                 8-Way
@@ -295,7 +295,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setTwelveWayCount(twelveWayCount + 1);
-                  setAttenuation(attenuation - 3.5);
+                  setAttenuation(attenuation - 11);
                 }}
               >
                 12-Way
@@ -308,7 +308,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setEightWayCount(eightWayCount - 1);
-                    setAttenuation(attenuation + 0.5);
+                    setAttenuation(attenuation + 10.5);
                   }}
                 >
                   {eightWayCount}
@@ -318,7 +318,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setTwelveWayCount(twelveWayCount - 1);
-                    setAttenuation(attenuation + 3.5);
+                    setAttenuation(attenuation + 11);
                   }}
                 >
                   {twelveWayCount}
