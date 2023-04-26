@@ -45,7 +45,36 @@ export default function Home() {
     setSelectedFrequency(option);
   };
 
-  const handleLossMeasurement = (feet) => {
+  const handleLossMeasurementByMeter = (meters) => {
+    meters = meters * 328;
+    if (selectedCable == "RG59") {
+      if (selectedFrequency == "55") {
+        setAttenuation(Math.round((meters * rg59MHz55) / 0.25) * 0.25);
+      } else if (selectedFrequency == "300") {
+        setAttenuation(Math.round((meters * rg59MHz300) / 0.25) * 0.25);
+      } else if (selectedFrequency == "500") {
+        setAttenuation(Math.round((meters * rg59MHz500) / 0.25) * 0.25);
+      }
+    } else if (selectedCable == "RG6") {
+      if (selectedFrequency == "55") {
+        setAttenuation(Math.round((meters * rg6MHz55) / 0.25) * 0.25);
+      } else if (selectedFrequency == "300") {
+        setAttenuation(Math.round((meters * rg6MHz300) / 0.25) * 0.25);
+      } else if (selectedFrequency == "500") {
+        setAttenuation(Math.round((meters * rg6MHz500) / 0.25) * 0.25);
+      }
+    } else if (selectedCable == "RG11") {
+      if (selectedFrequency == "55") {
+        setAttenuation(Math.round((meters * rg11MHz55) / 0.25) * 0.25);
+      } else if (selectedFrequency == "300") {
+        setAttenuation(Math.round((meters * rg11MHz300) / 0.25) * 0.25);
+      } else if (selectedFrequency == "500") {
+        setAttenuation(Math.round((meters * rg11MHz500) / 0.25) * 0.25);
+      }
+    }
+  };
+
+  const handleLossMeasurementByFoot = (feet) => {
     if (selectedCable == "RG59") {
       if (selectedFrequency == "55") {
         setAttenuation(Math.round((feet * rg59MHz55) / 0.25) * 0.25);
@@ -106,9 +135,6 @@ export default function Home() {
                 className="dropdown-item"
                 onClick={() => {
                   handleCableSizeChoice("RG59");
-                  if (cableDistance > 0) {
-                    handleLossMeasurement(cableDistance);
-                  }
                 }}
               >
                 Coax - RG59
@@ -118,9 +144,6 @@ export default function Home() {
                 className="dropdown-item"
                 onClick={() => {
                   handleCableSizeChoice("RG6");
-                  if (cableDistance > 0) {
-                    handleLossMeasurement(cableDistance);
-                  }
                 }}
               >
                 Coax - RG6
@@ -130,9 +153,6 @@ export default function Home() {
                 className="dropdown-item"
                 onClick={() => {
                   handleCableSizeChoice("RG11");
-                  if (cableDistance > 0) {
-                    handleLossMeasurement(cableDistance);
-                  }
                 }}
               >
                 Coax - RG11
@@ -156,9 +176,6 @@ export default function Home() {
                 className="dropdown-item"
                 onClick={() => {
                   handleFrequencyChoice("55");
-                  if (cableDistance > 0) {
-                    handleLossMeasurement(cableDistance);
-                  }
                 }}
               >
                 55MHz
@@ -168,9 +185,6 @@ export default function Home() {
                 className="dropdown-item"
                 onClick={() => {
                   handleFrequencyChoice("300");
-                  if (cableDistance > 0) {
-                    handleLossMeasurement(cableDistance);
-                  }
                 }}
               >
                 300MHz
@@ -180,9 +194,6 @@ export default function Home() {
                 className="dropdown-item"
                 onClick={() => {
                   handleFrequencyChoice("500");
-                  if (cableDistance > 0) {
-                    handleLossMeasurement(cableDistance);
-                  }
                 }}
               >
                 500MHz
@@ -199,23 +210,24 @@ export default function Home() {
             <Form.Control
               className="search-input-form-control form-input"
               type="text"
+              // value={cableDistance}
               placeholder={measurement}
               onChange={(e) => {
                 setCableDistance(e.target.value);
-                handleLossMeasurement(e.target.value);
               }}
             />
           </FloatingLabel>
         </div>
-
         <div>
           <button
             className="primary-btn"
             onClick={() => {
               if (measurement == "Cable Ft") {
                 setMeasurement("Cable Meters");
+                // setCableDistance(cableDistance / 328);
               } else {
                 setMeasurement("Cable Ft");
+                // setCableDistance(cableDistance * 328);
               }
             }}
           >
@@ -420,7 +432,22 @@ export default function Home() {
           </div>
         )}
 
-        <h1>attenuation {attenuation}</h1>
+        <div>
+          <button
+            className="primary-btn"
+            onClick={() => {
+              if (measurement == "Cable Meters") {
+                handleLossMeasurementByMeter(cableDistance);
+              } else {
+                handleLossMeasurementByFoot(cableDistance);
+              }
+            }}
+          >
+            Check Attenuation
+          </button>
+        </div>
+
+        {attenuation > 0 && <h1>- {attenuation}</h1>}
       </div>
     </div>
   );
