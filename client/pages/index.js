@@ -120,6 +120,9 @@ export default function Home() {
   return (
     <div className="Home">
       <div className="cable-loss-container">
+        <div>
+          <h1>Cable Loss Calc</h1>
+        </div>
         <div className="cable-size-dropdown">
           <Dropdown>
             <Dropdown.Toggle
@@ -447,7 +450,7 @@ export default function Home() {
           </button>
         </div>
 
-        {attenuation > 0 && <h1>- {attenuation}</h1>}
+        {attenuation > 0 && <h1>- {attenuation} db</h1>}
       </div>
     </div>
   );
