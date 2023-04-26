@@ -29,6 +29,21 @@ export default function Home() {
     setSelectedFrequency(option);
   };
 
+  // RG59
+  // 55MHz is roughly 0.023 loss per foot
+  // 300MHz is roughly 0.045 loss per foot
+  // 500MHz is roughly 0.057 loss per foot
+
+  // RG6
+  // 55MHz is roughly 0.015 loss per foot
+  // 300MHz is roughly 0.035 loss per foot
+  // 500MHz is roughly 0.046 loss per foot
+
+  // RG11
+  // 55MHz is roughly 0.01 loss per foot
+  // 300MHz is roughly 0.022 loss per foot
+  // 500MHz is roughly 0.028 loss per foot
+
   return (
     <div className="Home">
       <div className="cable-loss-container">
@@ -80,23 +95,23 @@ export default function Home() {
             <Dropdown.Menu>
               <Dropdown.Item
                 className="dropdown-item"
-                onClick={() => handleFrequencyChoice("36MHz")}
+                onClick={() => handleFrequencyChoice("55")}
               >
-                CH3 - 36 MHz
+                55MHz
               </Dropdown.Item>
 
               <Dropdown.Item
                 className="dropdown-item"
-                onClick={() => handleFrequencyChoice("297MHz")}
+                onClick={() => handleFrequencyChoice("300")}
               >
-                CH36 - 297 MHz
+                300MHz
               </Dropdown.Item>
 
               <Dropdown.Item
                 className="dropdown-item"
-                onClick={() => handleFrequencyChoice("501MHz")}
+                onClick={() => handleFrequencyChoice("500")}
               >
-                CH70 - 501 MHz
+                500MHz
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
