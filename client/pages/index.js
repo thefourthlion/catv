@@ -6,7 +6,7 @@ export default function Home() {
   const [selectedCable, setSelectedCable] = useState("Select Coax Size");
   const [selectedFrequency, setSelectedFrequency] =
     useState("Select Frequency");
-  const [cableDistance, setCableDistance] = useState(" ");
+  const [cableDistance, setCableDistance] = useState(0);
   const [measurement, setMeasurement] = useState("Cable Ft");
   const [showConnectors, setShowConnectors] = useState(false);
 
@@ -21,6 +21,22 @@ export default function Home() {
 
   const [attenuation, setAttenuation] = useState(0);
 
+  const [rg59MHz55, setRg59MHz55] = useState(0.02133);
+  const [rg59MHz300, setRg59MHz300] = useState(0.045);
+  const [rg59MHz500, setRg59MHz500] = useState(0.057);
+  const [rg6MHz55, setRg6MHz55] = useState(0.015);
+  const [rg6MHz300, setRg6MHz300] = useState(0.035);
+  const [rg6MHz500, setRg6MHz500] = useState(0.046);
+  const [rg11MHz55, setRg11MHz55] = useState(0.01);
+  const [rg11MHz300, setRg11MHz300] = useState(0.022);
+  const [rg11MHz500, setRg11MHz500] = useState(0.028);
+
+  const round = (value, step) => {
+    step || (step = 1.0);
+    var inv = 1.0 / step;
+    return Math.round(value * inv) / inv;
+  };
+
   const handleCableSizeChoice = (option) => {
     setSelectedCable(option);
   };
@@ -29,8 +45,36 @@ export default function Home() {
     setSelectedFrequency(option);
   };
 
+  const handleLossMeasurement = (feet) => {
+    if (selectedCable == "RG59") {
+      if (selectedFrequency == "55") {
+        setAttenuation(Math.round((feet * rg59MHz55) / 0.25) * 0.25);
+      } else if (selectedFrequency == "300") {
+        setAttenuation(Math.round((feet * rg59MHz300) / 0.25) * 0.25);
+      } else if (selectedFrequency == "500") {
+        setAttenuation(Math.round((feet * rg59MHz500) / 0.25) * 0.25);
+      }
+    } else if (selectedCable == "RG6") {
+      if (selectedFrequency == "55") {
+        setAttenuation(Math.round((feet * rg6MHz55) / 0.25) * 0.25);
+      } else if (selectedFrequency == "300") {
+        setAttenuation(Math.round((feet * rg6MHz300) / 0.25) * 0.25);
+      } else if (selectedFrequency == "500") {
+        setAttenuation(Math.round((feet * rg6MHz500) / 0.25) * 0.25);
+      }
+    } else if (selectedCable == "RG11") {
+      if (selectedFrequency == "55") {
+        setAttenuation(Math.round((feet * rg11MHz55) / 0.25) * 0.25);
+      } else if (selectedFrequency == "300") {
+        setAttenuation(Math.round((feet * rg11MHz300) / 0.25) * 0.25);
+      } else if (selectedFrequency == "500") {
+        setAttenuation(Math.round((feet * rg11MHz500) / 0.25) * 0.25);
+      }
+    }
+  };
+
   // RG59
-  // 55MHz is roughly 0.023 loss per foot
+  // 55MHz is roughly 0.021 loss per foot
   // 300MHz is roughly 0.045 loss per foot
   // 500MHz is roughly 0.057 loss per foot
 
@@ -60,21 +104,36 @@ export default function Home() {
             <Dropdown.Menu>
               <Dropdown.Item
                 className="dropdown-item"
-                onClick={() => handleCableSizeChoice("RG59")}
+                onClick={() => {
+                  handleCableSizeChoice("RG59");
+                  if (cableDistance > 0) {
+                    handleLossMeasurement(cableDistance);
+                  }
+                }}
               >
                 Coax - RG59
               </Dropdown.Item>
 
               <Dropdown.Item
                 className="dropdown-item"
-                onClick={() => handleCableSizeChoice("RG6")}
+                onClick={() => {
+                  handleCableSizeChoice("RG6");
+                  if (cableDistance > 0) {
+                    handleLossMeasurement(cableDistance);
+                  }
+                }}
               >
                 Coax - RG6
               </Dropdown.Item>
 
               <Dropdown.Item
                 className="dropdown-item"
-                onClick={() => handleCableSizeChoice("RG11")}
+                onClick={() => {
+                  handleCableSizeChoice("RG11");
+                  if (cableDistance > 0) {
+                    handleLossMeasurement(cableDistance);
+                  }
+                }}
               >
                 Coax - RG11
               </Dropdown.Item>
@@ -89,27 +148,42 @@ export default function Home() {
               id="dropdown-basic"
               className="dropdown"
             >
-              {selectedFrequency}
+              {selectedFrequency}MHz
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
               <Dropdown.Item
                 className="dropdown-item"
-                onClick={() => handleFrequencyChoice("55")}
+                onClick={() => {
+                  handleFrequencyChoice("55");
+                  if (cableDistance > 0) {
+                    handleLossMeasurement(cableDistance);
+                  }
+                }}
               >
                 55MHz
               </Dropdown.Item>
 
               <Dropdown.Item
                 className="dropdown-item"
-                onClick={() => handleFrequencyChoice("300")}
+                onClick={() => {
+                  handleFrequencyChoice("300");
+                  if (cableDistance > 0) {
+                    handleLossMeasurement(cableDistance);
+                  }
+                }}
               >
                 300MHz
               </Dropdown.Item>
 
               <Dropdown.Item
                 className="dropdown-item"
-                onClick={() => handleFrequencyChoice("500")}
+                onClick={() => {
+                  handleFrequencyChoice("500");
+                  if (cableDistance > 0) {
+                    handleLossMeasurement(cableDistance);
+                  }
+                }}
               >
                 500MHz
               </Dropdown.Item>
@@ -128,6 +202,7 @@ export default function Home() {
               placeholder={measurement}
               onChange={(e) => {
                 setCableDistance(e.target.value);
+                handleLossMeasurement(e.target.value);
               }}
             />
           </FloatingLabel>
@@ -164,7 +239,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setBarrelCount(barrelCount + 1);
-                  setAttenuation(attenuation - 0.5);
+                  setAttenuation(attenuation + 0.5);
                 }}
               >
                 Barrel
@@ -186,7 +261,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setBarrelCount(barrelCount - 1);
-                    setAttenuation(attenuation + 0.5);
+                    setAttenuation(attenuation - 0.5);
                   }}
                 >
                   {barrelCount}
@@ -195,7 +270,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setTwoWayCount(twoWayCount - 1);
-                    setAttenuation(attenuation + 3.5);
+                    setAttenuation(attenuation - 3.5);
                   }}
                 >
                   {twoWayCount}
@@ -209,7 +284,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setThreeWayCount(threeWayCount + 1);
-                  setAttenuation(attenuation - 5.5);
+                  setAttenuation(attenuation + 5.5);
                 }}
               >
                 3-Way
@@ -218,7 +293,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setFourWayCount(fourWayCount + 1);
-                  setAttenuation(attenuation - 7);
+                  setAttenuation(attenuation + 7);
                 }}
               >
                 4-Way
@@ -231,7 +306,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setThreeWayCount(threeWayCount - 1);
-                    setAttenuation(attenuation + 5.5);
+                    setAttenuation(attenuation - 5.5);
                   }}
                 >
                   {threeWayCount}
@@ -240,7 +315,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setFourWayCount(fourWayCount - 1);
-                    setAttenuation(attenuation + 7);
+                    setAttenuation(attenuation - 7);
                   }}
                 >
                   {fourWayCount}
@@ -255,7 +330,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setFiveWayCount(fiveWayCount + 1);
-                  setAttenuation(attenuation - 7);
+                  setAttenuation(attenuation + 7);
                 }}
               >
                 5-Way
@@ -264,7 +339,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setSixWayCount(sixWayCount + 1);
-                  setAttenuation(attenuation - 9);
+                  setAttenuation(attenuation + 9);
                 }}
               >
                 6-Way
@@ -277,7 +352,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setFiveWayCount(fiveWayCount - 1);
-                    setAttenuation(attenuation + 7);
+                    setAttenuation(attenuation - 7);
                   }}
                 >
                   {fiveWayCount}
@@ -286,7 +361,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setSixWayCount(sixWayCount - 1);
-                    setAttenuation(attenuation + 9);
+                    setAttenuation(attenuation - 9);
                   }}
                 >
                   {sixWayCount}
@@ -301,7 +376,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setEightWayCount(eightWayCount + 1);
-                  setAttenuation(attenuation - 10.5);
+                  setAttenuation(attenuation + 10.5);
                 }}
               >
                 8-Way
@@ -310,7 +385,7 @@ export default function Home() {
                 className="square-btn"
                 onClick={() => {
                   setTwelveWayCount(twelveWayCount + 1);
-                  setAttenuation(attenuation - 11);
+                  setAttenuation(attenuation + 11);
                 }}
               >
                 12-Way
@@ -323,7 +398,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setEightWayCount(eightWayCount - 1);
-                    setAttenuation(attenuation + 10.5);
+                    setAttenuation(attenuation - 10.5);
                   }}
                 >
                   {eightWayCount}
@@ -333,7 +408,7 @@ export default function Home() {
                   className="count"
                   onClick={() => {
                     setTwelveWayCount(twelveWayCount - 1);
-                    setAttenuation(attenuation + 11);
+                    setAttenuation(attenuation - 11);
                   }}
                 >
                   {twelveWayCount}
