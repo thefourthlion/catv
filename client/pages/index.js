@@ -7,7 +7,7 @@ export default function Home() {
   const [selectedFrequency, setSelectedFrequency] =
     useState("Select Frequency");
   const [cableDistance, setCableDistance] = useState(" ");
-
+  const [measurement, setMeasurement] = useState("Cable Ft");
   const handleCableSizeChoice = (option) => {
     setSelectedCable(option);
   };
@@ -92,17 +92,32 @@ export default function Home() {
         <div>
           <FloatingLabel
             className="search-input-label form-label"
-            label="Cable Ft"
+            label={measurement}
           >
             <Form.Control
               className="search-input-form-control form-input"
               type="text"
-              placeholder="Cable Ft"
+              placeholder={measurement}
               onChange={(e) => {
                 setCableDistance(e.target.value);
               }}
             />
           </FloatingLabel>
+        </div>
+
+        <div>
+          <button
+            className="primary-btn"
+            onClick={() => {
+              if (measurement == "Cable Ft") {
+                setMeasurement("Cable Meters");
+              } else {
+                setMeasurement("Cable Ft");
+              }
+            }}
+          >
+            {measurement == "Cable Ft" ? "Cable in Meters" : "Cable in Feet"}
+          </button>
         </div>
       </div>
     </div>
