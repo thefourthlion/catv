@@ -119,6 +119,10 @@ export default function Home() {
             {measurement == "Cable Ft" ? "Cable in Meters" : "Cable in Feet"}
           </button>
         </div>
+
+        <div>
+          <button className="primary-btn">Check Attenuation</button>
+        </div>
       </div>
     </div>
   );
