@@ -1,5 +1,5 @@
-apps: 
-- script: ./server.js 
-cwd: /home/application/client/ 
-name: "application" 
-interpreter: /usr/bin/node
+apps:
+  - script: ./server.js
+    cwd: /home/everettdeleon/catv/client/
+    name: "catv-client"
+    interpreter: /usr/bin/node
