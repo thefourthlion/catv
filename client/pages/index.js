@@ -236,7 +236,7 @@ export default function Home() {
         </div>
 
         <button
-          className="primary-btn"
+          className="secondary-btn"
           onClick={() => {
             setShowConnectors(!showConnectors);
           }}
@@ -434,7 +434,7 @@ export default function Home() {
 
         <div>
           <button
-            className="primary-btn"
+            className="third-btn"
             onClick={() => {
               if (measurement == "Cable Meters") {
                 handleLossMeasurementByMeter(cableDistance);
