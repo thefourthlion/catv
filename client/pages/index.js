@@ -8,6 +8,8 @@ export default function Home() {
     useState("Select Frequency");
   const [cableDistance, setCableDistance] = useState(" ");
   const [measurement, setMeasurement] = useState("Cable Ft");
+  const [showConnectors, setShowConnectors] = useState(false);
+
   const handleCableSizeChoice = (option) => {
     setSelectedCable(option);
   };
@@ -120,9 +122,35 @@ export default function Home() {
           </button>
         </div>
 
-        <div>
-          <button className="primary-btn">Check Attenuation</button>
-        </div>
+        <button
+          className="primary-btn"
+          onClick={() => {
+            setShowConnectors(!showConnectors);
+          }}
+        >
+          Add Connectors
+        </button>
+
+        {showConnectors && (
+          <div className="connectors">
+            <div className="square-btns">
+              <button className="square-btn">Barrel</button>
+              <button className="square-btn">2-Way</button>
+            </div>
+            <div className="square-btns">
+              <button className="square-btn">3-Way</button>
+              <button className="square-btn">4-Way</button>
+            </div>
+            <div className="square-btns">
+              <button className="square-btn">5-Way</button>
+              <button className="square-btn">6-Way</button>
+            </div>
+            <div className="square-btns">
+              <button className="square-btn">8-Way</button>
+              <button className="square-btn">12-Way</button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
