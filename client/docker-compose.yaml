@@ -1,0 +1,12 @@
+services:
+  client:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: catv-client
+    ports:
+      - "4006:4006"
+    environment:
+      - PORT=4006
+    volumes:
+      - ./:/catv-client
