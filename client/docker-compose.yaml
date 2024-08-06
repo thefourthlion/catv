@@ -1,5 +1,5 @@
 services:
-  client:
+  catv-client:
     build:
       context: ./
       dockerfile: Dockerfile
